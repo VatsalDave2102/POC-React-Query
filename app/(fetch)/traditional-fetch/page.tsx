@@ -1,3 +1,5 @@
+import TraditionalFetchExample from "@/components/traditional/traditional-fetch-example";
+
 export default function TraditionalFetchPage() {
-	return <div>Traditional Fetch Page</div>;
+	return <TraditionalFetchExample />;
 }

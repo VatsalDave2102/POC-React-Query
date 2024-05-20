@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export function Navbar() {
 	return (
-		<nav className="bg-rose-500">
+		<nav className="bg-rose-500 shadow">
 			<ol className="flex gap-x-3 py-2">
 				<li className="px-2">
 					<Button variant={"link"} className="text-white px-0">
