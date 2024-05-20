@@ -1,3 +1,5 @@
+import ReactQueryFetchExample from "@/components/rq/rq-fetch-example";
+
 export default function ReactQueryFetchPage() {
-	return <div>React Qeury Fetch Page</div>;
+	return <ReactQueryFetchExample />;
 }

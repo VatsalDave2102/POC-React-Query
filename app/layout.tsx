@@ -1,10 +1,10 @@
-import Link from "next/link";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/navbar";
+import QueryProvider from "@/components/provider/query-provider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -26,8 +26,10 @@ export default function RootLayout({
 					inter.variable
 				)}
 			>
-				<Navbar />
-				{children}
+				<QueryProvider>
+					<Navbar />
+					{children}
+				</QueryProvider>
 			</body>
 		</html>
 	);
