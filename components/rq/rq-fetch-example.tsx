@@ -7,9 +7,7 @@ import { Product } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 
 const fetchProducts = async (): Promise<Product[]> => {
-	const response = await axios.get(
-		"https://api.escuelajs.co/api/v1/products?offset=10&limit=10"
-	);
+	const response = await axios.get("https://api.escuelajs.co/api/v1/products");
 
 	return response.data;
 };
@@ -21,9 +19,17 @@ const ReactQueryFetchExample = () => {
 	// a common pattern is to extract fetching function outside
 	const results = useQuery({ queryKey: ["products"], queryFn: fetchProducts });
 
-	// destructuring loading state and data recieved from useQuery
-	const { isPending, data } = results;
+	// destructuring loading state, data, error message recieved from useQuery
+	const { isPending, data, isError, error } = results;
 
+	// show error message if error occured during fetching,
+	// the error message gets delayed because react-query
+	// retries to fetch request
+	if (isError) {
+		return (
+			<h2 className="text-2xl font-semibold text-center">{error.message}</h2>
+		);
+	}
 	return (
 		<div className="container">
 			<h2 className="text-2xl font-semibold text-center">Products list</h2>
