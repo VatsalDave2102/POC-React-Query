@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/navbar";
@@ -29,6 +30,7 @@ export default function RootLayout({
 				<QueryProvider>
 					<Navbar />
 					{children}
+					<ReactQueryDevtools initialIsOpen={false} />
 				</QueryProvider>
 			</body>
 		</html>
