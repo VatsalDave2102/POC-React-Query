@@ -12,6 +12,7 @@ const Navlinks = [
 	{ tag: "RQ Refetch Default", link: "/rq-refetch-default" },
 	{ tag: "RQ Polling", link: "/rq-polling" },
 	{ tag: "RQ Fetch Onclick", link: "/rq-fetch-onclick" },
+	{ tag: "RQ Data Transformation", link: "/rq-data-transform" },
 ];
 export function Navbar() {
 	return (
