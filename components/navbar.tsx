@@ -26,6 +26,11 @@ export function Navbar() {
 						<Link href={"/rq-cache"}>React Query Cache</Link>
 					</Button>
 				</li>
+				<li className="px-2">
+					<Button variant={"link"} className="text-white px-0">
+						<Link href={"/rq-stale"}>React Query Stale</Link>
+					</Button>
+				</li>
 			</ol>
 		</nav>
 	);
