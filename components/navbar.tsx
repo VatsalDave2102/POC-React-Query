@@ -1,27 +1,52 @@
+"use client";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+import { Accordion, AccordionItem, AccordionTrigger } from "./ui/accordion";
+import { AccordionContent } from "@radix-ui/react-accordion";
 
 const Navlinks = [
-	{ tag: "Home", link: "/" },
-	{ tag: "Traditional Fetch", link: "/traditional-fetch" },
 	{ tag: "RQ Fetch", link: "/rq-fetch" },
 	{ tag: "RQ Cache", link: "/rq-cache" },
 	{ tag: "RQ Stale", link: "/rq-stale" },
 	{ tag: "RQ Refetch Default", link: "/rq-refetch-default" },
 	{ tag: "RQ Polling", link: "/rq-polling" },
+	{ tag: "RQ Fetch Onclick", link: "/rq-fetch-onclick" },
 ];
 export function Navbar() {
 	return (
-		<nav className="bg-rose-500 shadow">
-			<ol className="flex gap-x-3 py-2">
-				{Navlinks.map((navlink) => (
-					<li className="px-2" key={navlink.link}>
-						<Button variant={"link"} className="text-white px-0">
-							<Link href={navlink.link}>{navlink.tag}</Link>
-						</Button>
-					</li>
-				))}
+		<nav className="bg-rose-500 shadow w-[300px]">
+			<ol className="px-1">
+				<Accordion type="single" collapsible>
+					<AccordionItem value="home" className="py-2">
+						<li>
+							<Button variant={"link"} className="text-white px-0 text-md">
+								<Link href={"/"}>Home</Link>
+							</Button>
+						</li>
+					</AccordionItem>
+					<AccordionItem value="traditional-fetch" className="py-2">
+						<li>
+							<Button variant={"link"} className="text-white px-0 text-md">
+								<Link href={"/traditional-fetch"}>Traditional Fetch</Link>
+							</Button>
+						</li>
+					</AccordionItem>
+					<AccordionItem value="rq">
+						<AccordionTrigger className="text-white">
+							React Query Examples
+						</AccordionTrigger>
+						<AccordionContent>
+							{Navlinks.map((navlink) => (
+								<li className="px-2 rounded transition" key={navlink.link}>
+									<Button variant={"link"} className="text-white px-0">
+										<Link href={navlink.link}>{navlink.tag}</Link>
+									</Button>
+								</li>
+							))}
+						</AccordionContent>
+					</AccordionItem>
+				</Accordion>
 			</ol>
 		</nav>
 	);
