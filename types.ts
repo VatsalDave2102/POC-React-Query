@@ -23,3 +23,12 @@ export interface Post {
 	title: string;
 	body: string;
 }
+
+export interface User {
+	id: number;
+	email: string;
+	password: string;
+	name: string;
+	role: string;
+	avatar: string;
+}

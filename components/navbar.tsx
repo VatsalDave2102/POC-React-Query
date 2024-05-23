@@ -15,6 +15,8 @@ const Navlinks = [
 	{ tag: "RQ Data Transformation", link: "/rq-data-transform" },
 	{ tag: "RQ Custom Hook", link: "/rq-custom-hook" },
 	{ tag: "RQ Query by id", link: "/rq-query-by-id" },
+	{ tag: "RQ Parallel Queries", link: "/rq-parallel-queries" },
+	{ tag: "RQ Use Queries", link: "/rq-use-queries" },
 ];
 export function Navbar() {
 	return (
