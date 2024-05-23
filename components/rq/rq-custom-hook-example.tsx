@@ -1,30 +1,15 @@
 "use client";
 
-import axios from "axios";
 import { Loader2 } from "lucide-react";
 
-import { Post } from "@/types";
-import { useQuery } from "@tanstack/react-query";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { usePostsData } from "@/hooks/usePostsData";
 
-const fetchPosts = async (): Promise<Post[]> => {
-	const response = await axios.get(
-		"https://jsonplaceholder.typicode.com/posts"
-	);
-
-	return response.data;
-};
-
-const ReactQueryDataTransformationExample = () => {
-	const results = useQuery({
-		queryKey: ["posts-transform"],
-		queryFn: fetchPosts,
-		// to transform incoming data to your need, we can use select which gets the data as argument
-		select: (data) => {
-			const postTitle = data.map((post) => post.title);
-			return postTitle;
-		},
-	});
+const ReactQueryCustomHookExample = () => {
+	// fetching posts from custom hook, can be used in others components
+	// create a custom hook if you want same data in other components
+	// in that way query key will be same and results be server faster due to caching
+	const results = usePostsData();
 
 	const { isPending, data, isError, error, isFetching, isRefetching } = results;
 
@@ -40,7 +25,10 @@ const ReactQueryDataTransformationExample = () => {
 	}
 	return (
 		<div className="container">
-			<h2 className="text-2xl font-semibold text-center">Posts list</h2>
+			<h1 className="text-xl font-semibold text-center my-5">
+				The posts are fetched using a custom query hook
+			</h1>
+			<h2 className="text-xl font-semibold text-center">Posts list</h2>
 			{isPending ? (
 				<Loader2 className="w-8 h-8 text-rose-500 animate-spin mx-auto my-5" />
 			) : (
@@ -60,4 +48,4 @@ const ReactQueryDataTransformationExample = () => {
 	);
 };
 
-export default ReactQueryDataTransformationExample;
+export default ReactQueryCustomHookExample;

@@ -13,6 +13,8 @@ const Navlinks = [
 	{ tag: "RQ Polling", link: "/rq-polling" },
 	{ tag: "RQ Fetch Onclick", link: "/rq-fetch-onclick" },
 	{ tag: "RQ Data Transformation", link: "/rq-data-transform" },
+	{ tag: "RQ Custom Hook", link: "/rq-custom-hook" },
+	{ tag: "RQ Query by id", link: "/rq-query-by-id" },
 ];
 export function Navbar() {
 	return (
@@ -39,7 +41,7 @@ export function Navbar() {
 						</AccordionTrigger>
 						<AccordionContent>
 							{Navlinks.map((navlink) => (
-								<li className="px-2 rounded transition" key={navlink.link}>
+								<li className="px-2" key={navlink.link}>
 									<Button variant={"link"} className="text-white px-0">
 										<Link href={navlink.link}>{navlink.tag}</Link>
 									</Button>
