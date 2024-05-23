@@ -11,11 +11,14 @@ import {
 } from "@/components/ui/card";
 import { useProductData } from "@/hooks/useProductData";
 
+// this is to show single product using dynamic id and a custom query hook
 const ReactQuerySingleProduct = ({ productId }: { productId: string }) => {
+	// fetching data using product id
 	const results = useProductData(productId);
 
 	const { isPending, data, isError, error } = results;
 
+	// show error
 	if (isError) {
 		return (
 			<h2 className="text-2xl font-semibold text-center">{error.message}</h2>

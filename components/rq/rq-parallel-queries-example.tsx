@@ -13,14 +13,17 @@ import {
 import { Product, User } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 
+// we have defined two fetching functions to show parallel queries
+// one for products and one for users
 const fetchProducts = async (): Promise<Product[]> => {
 	const response = await axios.get("https://api.escuelajs.co/api/v1/products");
-
 	return response.data;
 };
 
 const fetchUsers = async (): Promise<User[]> => {
-	const response = await axios.get("https://api.escuelajs.co/api/v1/users");
+	const response = await axios.get(
+		"https://jsonplaceholder.typicode.com/users"
+	);
 	return response.data;
 };
 

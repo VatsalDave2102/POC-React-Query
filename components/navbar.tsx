@@ -17,6 +17,7 @@ const Navlinks = [
 	{ tag: "RQ Query by id", link: "/rq-query-by-id" },
 	{ tag: "RQ Parallel Queries", link: "/rq-parallel-queries" },
 	{ tag: "RQ Use Queries", link: "/rq-use-queries" },
+	{ tag: "RQ Dependent Queries", link: "/rq-dependent-queries" },
 ];
 export function Navbar() {
 	return (

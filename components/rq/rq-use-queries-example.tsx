@@ -13,13 +13,15 @@ import { User } from "@/types";
 import { useQueries } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 
+// fetching functions
 const fetchUser = async (userId: string): Promise<User> => {
 	const response = await axios.get(
-		`https://api.escuelajs.co/api/v1/users/${userId}`
+		`https://jsonplaceholder.typicode.com/users/${userId}`
 	);
 	return response.data;
 };
 
+// hard coded user ids, in real life scenarios pass them using props or searchparams
 const users = ["1", "2", "3", "4"];
 const ReactQueryUseQueriesExample = () => {
 	// to fetch multiple queries in parallel but dynamically,

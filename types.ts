@@ -32,3 +32,9 @@ export interface User {
 	role: string;
 	avatar: string;
 }
+
+export interface Album {
+	userId: number;
+	id: number;
+	title: string;
+}
