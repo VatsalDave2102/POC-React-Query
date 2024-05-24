@@ -19,6 +19,7 @@ const Navlinks = [
 	{ tag: "RQ Use Queries", link: "/rq-use-queries" },
 	{ tag: "RQ Dependent Queries", link: "/rq-dependent-queries" },
 	{ tag: "RQ Pagination", link: "/rq-pagination" },
+	{ tag: "RQ Inifinite scroll", link: "/rq-infinite-scroll" },
 ];
 export function Navbar() {
 	return (
