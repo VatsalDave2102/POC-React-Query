@@ -21,7 +21,7 @@ const Navlinks = [
 	{ tag: "RQ Pagination", link: "/rq-pagination" },
 	{ tag: "RQ Inifinite scroll", link: "/rq-infinite-scroll" },
 	{ tag: "RQ Mutation", link: "/rq-mutation" },
-	{ tag: "RQ Optimistic update", link: "/rq-optimistic-update" },
+	{ tag: "RQ Axios Interceptor", link: "/rq-axios-interceptor" },
 ];
 export function Navbar() {
 	return (

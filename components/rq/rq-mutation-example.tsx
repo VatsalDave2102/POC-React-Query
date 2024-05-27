@@ -1,7 +1,7 @@
 "use client";
 
-import axios, { AxiosResponse } from "axios";
 import { Loader2 } from "lucide-react";
+import axios, { AxiosResponse } from "axios";
 import { SyntheticEvent, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -45,7 +45,6 @@ const ReactQueryMutationExample = () => {
 
 		// given below is a little more verbose code, but it saves an additional query request
 		onSuccess: (data) => {
-			console.log(data);
 			queryClient.setQueryData(
 				["users-mutation"],
 				(
@@ -114,7 +113,7 @@ const ReactQueryMutationExample = () => {
 						/>
 					</div>
 					<div className="flex flex-col">
-						<label htmlFor="name">Email</label>
+						<label htmlFor="email">Email</label>
 						<input
 							type="email"
 							name="email"
