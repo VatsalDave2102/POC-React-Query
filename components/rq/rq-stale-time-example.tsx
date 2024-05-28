@@ -2,9 +2,8 @@
 
 import axios from "axios";
 import { Loader2 } from "lucide-react";
-
-import { Product } from "@/types";
 import { useQuery } from "@tanstack/react-query";
+
 import {
 	Card,
 	CardContent,
@@ -12,7 +11,9 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { Product } from "@/types";
 
+// function to fetch products list
 const fetchProducts = async (): Promise<Product[]> => {
 	const response = await axios.get("https://api.escuelajs.co/api/v1/products");
 
@@ -20,7 +21,7 @@ const fetchProducts = async (): Promise<Product[]> => {
 };
 
 const ReactQueryStaleTimeExample = () => {
-	// if we know that data won't be changed to much,
+	// if the data won't be changed to much,
 	// we can prevent susbsequent requests to server by using stale time option
 	// stale time is the time till which query remains fresh, as if it was just
 	// fetched from query function, after the time expires,
@@ -29,28 +30,27 @@ const ReactQueryStaleTimeExample = () => {
 	const results = useQuery({
 		queryKey: ["products-stale"],
 		queryFn: fetchProducts,
-		staleTime: 30000,
+		staleTime: 30000, // for 30s, query will remain fresh and no request will be made
 	});
 
-	const { isPending, data, isError, error, isFetching } = results;
+	// extracting data, error and states
+	const { isPending, data, isError, error } = results;
 
-	// isPending to show when there is no cached data, and data is fetched
-	// isFetching is true on initial fetching and background fetching
-	// once the staleTime expires, fetch request will be made
-	console.log(isPending, isFetching);
-
-	if (isError) {
-		return (
-			<h2 className="text-2xl font-semibold text-center">{error.message}</h2>
-		);
-	}
 	return (
-		<div className="container">
-			<h2 className="text-2xl font-semibold text-center">Products list</h2>
+		<>
+			<h2 className="text-2xl font-semibold">Products list</h2>
+
+			{/* display error */}
+			{isError ? (
+				<h2 className="text-2xl font-semibold text-center">{error.message}</h2>
+			) : null}
+
+			{/* display loader */}
 			{isPending ? (
 				<Loader2 className="w-8 h-8 text-rose-500 animate-spin mx-auto my-5" />
 			) : (
 				<ol className="flex flex-wrap gap-y-5 my-5 justify-between">
+					{/* display data */}
 					{data?.map((product) => (
 						<li key={product.id}>
 							<Card className="w-[250px]">
@@ -71,7 +71,7 @@ const ReactQueryStaleTimeExample = () => {
 					))}
 				</ol>
 			)}
-		</div>
+		</>
 	);
 };
 

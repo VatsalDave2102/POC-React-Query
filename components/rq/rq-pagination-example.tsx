@@ -2,11 +2,8 @@
 
 import axios from "axios";
 import { Loader2 } from "lucide-react";
-import {
-	keepPreviousData,
-	useQuery,
-	useQueryClient,
-} from "@tanstack/react-query";
+import { useState } from "react";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import {
 	Card,
@@ -16,9 +13,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Product } from "@/types";
-import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 // function to fetch 10 products to show pagination using offset and limit
 const fetchProducts = async (offset: string): Promise<Product[]> => {
@@ -42,36 +37,24 @@ const ReactQueryPaginationExample = () => {
 		staleTime: 5000,
 	});
 
-	const { isFetching, isError, data, error, isPlaceholderData } = results;
+	// extracting data, error and states
+	const { isPending, isError, data, error } = results;
 
-	// use queryClient to prefetch to next page when component mounts using useEffect, comment out the given below useEffect to remove prefetching
-	const queryClient = useQueryClient();
-
-	useEffect(() => {
-		// checking if there is no placeHolder data or it is last page, we fetch next page
-		if (!isPlaceholderData && offset < 10) {
-			const nextPage = offset + 10;
-			queryClient.prefetchQuery({
-				queryKey: ["products-pagination", nextPage],
-				queryFn: () => fetchProducts(nextPage.toString()),
-			});
-		}
-	}, [data, isPlaceholderData, offset, queryClient]);
-
-	if (isError) {
-		return (
-			<h2 className="text-2xl font-semibold text-center">{error.message}</h2>
-		);
-	}
 	return (
-		<div className="container">
-			<h2 className="text-2xl font-semibold text-center mb-5">Products list</h2>
-			{isFetching ? (
+		<>
+			<h2 className="text-2xl font-semibold mb-5">Products list</h2>
+			{/* display error */}
+			{isError ? (
+				<h2 className="text-2xl font-semibold text-center">{error.message}</h2>
+			) : null}
+
+			{/* display loader */}
+			{isPending ? (
 				<Loader2 className="w-8 h-8 text-rose-500 animate-spin mx-auto my-5" />
 			) : (
 				<>
-					<ScrollArea className="h-[550px] mb-5">
-						<ol className="flex flex-wrap gap-y-5 my-5 justify-between">
+					<div className="h-[550px] mb-5">
+						<ol className="flex flex-wrap gap-5 my-5">
 							{data?.map((product) => (
 								<li key={product.id}>
 									<Card className="w-[250px]">
@@ -93,7 +76,7 @@ const ReactQueryPaginationExample = () => {
 								</li>
 							))}
 						</ol>
-					</ScrollArea>
+					</div>
 					{/* previous and next buttons */}
 					<div className="flex justify-between">
 						<Button
@@ -113,7 +96,7 @@ const ReactQueryPaginationExample = () => {
 					</div>
 				</>
 			)}
-		</div>
+		</>
 	);
 };
 

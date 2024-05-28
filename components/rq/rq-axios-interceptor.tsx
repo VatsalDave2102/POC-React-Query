@@ -5,16 +5,16 @@ import { Loader2 } from "lucide-react";
 import { SyntheticEvent, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-import { axiosInterceptor } from "@/utils/axios-utils";
 import {
 	Card,
 	CardContent,
 	CardDescription,
 	CardHeader,
 	CardTitle,
-} from "../ui/card";
+} from "@/components/ui/card";
 import { User } from "@/types";
 import { Button } from "@/components/ui/button";
+import { axiosInterceptor } from "@/utils/axios-utils";
 
 // function to post user data to backend, we have kept password and avatar hard-coded here
 const addUser = async (user: {
@@ -49,21 +49,15 @@ const fetchUser = async (): Promise<User> => {
 
 const ReactQueryAxiosInterceptorExample = () => {
 	return (
-		<div className="container">
-			<h1 className="text-2xl font-semibold mt-5">Axios Interceptor example</h1>
-			<p className="text-lg mb-5">
-				This is an example of axios interceptors, where we intercept request
-				with the axios client to modify request such as adding HTTP header or
-				handling errors. In this example we are attaching HTTP Authorization
-				heeader on request header and handling error by consoling them on
-				responses. We are adding and logging in user because of Free API, where
-				data is constantly updated, so current user might get deleted as well.
-				Hence, first add the user.
-			</p>
-			<AddUserForm />
-			<LoginForm />
-			<FetchUser />
-		</div>
+		<>
+			<div className="flex flex-col">
+				<div className="flex gap-36">
+					<AddUserForm />
+					<LoginForm />
+				</div>
+				<FetchUser />
+			</div>
+		</>
 	);
 };
 
@@ -97,9 +91,9 @@ const AddUserForm = () => {
 	};
 
 	return (
-		<>
+		<div className="border-t-2 py-3">
 			{" "}
-			<h2 className="text-2xl font-semibold my-5">Add User Form</h2>
+			<h2 className="text-2xl font-semibold mb-5">Add User Form</h2>
 			<p className="text-lg mb-5">
 				Add user to the database by filling details.
 			</p>
@@ -151,7 +145,7 @@ const AddUserForm = () => {
 			)}
 			{/* show success message */}
 			{isSuccess ? <p className="mt-5 ">User added succesfully!</p> : null}
-		</>
+		</div>
 	);
 };
 
@@ -188,18 +182,20 @@ const LoginForm = () => {
 	};
 
 	return (
-		<>
-			<h2 className="text-2xl font-semibold my-5">Login Form</h2>
+		<div className="border-t-2 py-3">
+			<h2 className="text-2xl font-semibold mb-5">Login Form</h2>
 			<p className="text-lg mb-5">
 				Login user to store its current user tokens in localStorage
 			</p>
+
+			{/* display error */}
+			{isError ? (
+				<h2 className="text-2xl font-semibold text-center">{error.message}</h2>
+			) : null}
+
+			{/* display loader */}
 			{isPending ? (
 				<Loader2 className="w-8 h-8 text-rose-500 animate-spin mx-auto my-5" />
-			) : isError ? (
-				<div>
-					<h2 className="text-xl font-semibold">{error.message}</h2>
-					<Button onClick={reset}>Reset</Button>
-				</div>
 			) : (
 				<form onSubmit={onSubmit} className="space-y-6">
 					<div className="flex flex-col">
@@ -232,23 +228,25 @@ const LoginForm = () => {
 					User logged in succesfully and stored to localStorage!
 				</p>
 			) : null}
-		</>
+		</div>
 	);
 };
 
 // component to fetch current user and display its details
 const FetchUser = () => {
+	// query to fetch current user, the http header will have auth token attached using interceptor
 	const results = useQuery({
 		queryKey: ["current-user"],
 		queryFn: fetchUser,
 		enabled: false,
 	});
 
+	// extracting data, error and states
 	const { isFetching, isLoading, data, isError, error, refetch } = results;
 
 	return (
-		<>
-			<h2 className="text-2xl font-semibold my-5">Fetch Current User</h2>
+		<div className="border-t-2 py-3">
+			<h2 className="text-2xl font-semibold mb-5">Fetch Current User</h2>
 			<p className="text-lg mb-5">
 				Fetching user using axios interceptors. We have attached HTTP
 				Authorization header in the request using interceptor.
@@ -279,7 +277,7 @@ const FetchUser = () => {
 					</CardContent>
 				</Card>
 			) : null}
-		</>
+		</div>
 	);
 };
 

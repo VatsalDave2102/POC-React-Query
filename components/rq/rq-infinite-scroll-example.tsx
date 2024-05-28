@@ -1,8 +1,9 @@
 "use client";
 
 import axios from "axios";
-import React, { useEffect } from "react";
 import { Loader2 } from "lucide-react";
+import React, { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import {
@@ -13,11 +14,11 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Product } from "@/types";
-import { Button } from "../ui/button";
-import { useInView } from "react-intersection-observer";
+import { Button } from "@/components/ui/button";
 
-// function to fetch 10 products to for inifinite query using a load more button
-// pageParam is provided by useInfiniteQuery, for page groups
+// function to fetch 10 products for inifinite query using a load more button
+// pageParam is provided by useInfiniteQuery, multiplying it by 10
+// as offset method is used to fetch data
 const fetchProducts = async ({
 	pageParam = 0,
 }: {
@@ -30,7 +31,7 @@ const fetchProducts = async ({
 };
 
 const ReactQueryInifiniteScrollExample = () => {
-	// hook to check if load more button is in view, if it is, then directly fetch more products
+	// hook to check if load more button is in view, then directly fetch more products
 	const { ref, inView } = useInView();
 
 	// useInfiniteQuery hook to fetch products infinitely
@@ -39,15 +40,15 @@ const ReactQueryInifiniteScrollExample = () => {
 		queryFn: fetchProducts,
 		// the initial page will be 0 having 10 products
 		initialPageParam: 0,
-		// function to get next page, here we have kept only 7 pages, if fetchNextPage is called, page updates here
+		// function to get next page, checking if last page has less than 10 products
+		// that means there are no more products left, hence return undefined
 		getNextPageParam: (lastPage, pages) => {
-			if (pages.length < 7) {
-				return pages.length + 1;
-			} else {
+			if (lastPage.length < 10) {
 				return undefined;
+			} else {
+				return pages.length + 1;
 			}
 		},
-		maxPages: 7,
 	});
 
 	const {
@@ -67,35 +68,27 @@ const ReactQueryInifiniteScrollExample = () => {
 		}
 	}, [fetchNextPage, inView]);
 
-	// show error state
-	if (status === "error") {
-		return (
-			<h2 className="text-2xl font-semibold text-center">{error.message}</h2>
-		);
-	}
-
 	return (
-		<div className="container">
-			<h1 className="text-2xl font-semibold mt-5">
-				Infinite Query with load more button
-			</h1>
-			<p className="text-lg mb-5">
-				This is an example of fetching data infinitely using useInifiniteQuery,
-				first we fetch only 10 products, as user clicks load more button, or it
-				comes into view, another 10 products are fetched.
-			</p>
-
+		<>
 			<h2 className="text-2xl font-semibold my-5">Products list</h2>
+			{/* display error */}
+			{status === "error" ? (
+				<h2 className="text-2xl font-semibold text-center">{error.message}</h2>
+			) : null}
+
+			{/* display loader */}
 			{status === "pending" ? (
 				<Loader2 className="w-8 h-8 text-rose-500 animate-spin mx-auto my-5" />
 			) : (
 				<>
 					<ol className="flex flex-wrap gap-3 mb-5">
+						{/* pages property is an array of every page fethced, hence need to map over it first */}
 						{data?.pages.map((group, i) => (
 							<React.Fragment key={i}>
+								{/* mapping over each page */}
 								{group.map((product) => (
 									<li key={product.id}>
-										<Card className="w-[250px]">
+										<Card className="w-[600px]">
 											<CardHeader>
 												<CardTitle className="truncate">
 													{product.title}
@@ -140,7 +133,7 @@ const ReactQueryInifiniteScrollExample = () => {
 					</div>
 				</>
 			)}
-		</div>
+		</>
 	);
 };
 

@@ -2,9 +2,8 @@
 
 import axios from "axios";
 import { Loader2 } from "lucide-react";
-
-import { Product } from "@/types";
 import { useQuery } from "@tanstack/react-query";
+
 import {
 	Card,
 	CardContent,
@@ -12,8 +11,10 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Button } from "../ui/button";
+import { Product } from "@/types";
+import { Button } from "@/components/ui/button";
 
+// function to fetch products list
 const fetchProducts = async (): Promise<Product[]> => {
 	const response = await axios.get("https://api.escuelajs.co/api/v1/products");
 
@@ -27,21 +28,12 @@ const ReactQueryFetchOnClickExample = () => {
 		enabled: false, // this will not trigger fetching as the component mounts
 	});
 
-	const { isLoading, data, isError, error, isFetching, isRefetching, refetch } =
-		results;
+	// the refetch function allows to trigger manual fetching
+	const { isLoading, data, isError, error, isFetching, refetch } = results;
 
-	// isPending to show when there is no cached data, and data is fetched
-	// isFetching is true on initial fetching and background fetching
-	console.log(isLoading, isFetching, isRefetching);
-
-	if (isError) {
-		return (
-			<h2 className="text-2xl font-semibold text-center">{error.message}</h2>
-		);
-	}
 	return (
-		<div className="container">
-			<h2 className="text-2xl font-semibold text-center">Products list</h2>
+		<>
+			<h2 className="text-2xl font-semibold">Products list</h2>
 			{/* button to trigger fetching manually */}
 			<Button
 				className="bg-rose-500 hover:bg-rose-500/80"
@@ -51,10 +43,17 @@ const ReactQueryFetchOnClickExample = () => {
 			>
 				Fetch Products
 			</Button>
+			{/* display error */}
+			{isError ? (
+				<h2 className="text-2xl font-semibold text-center">{error.message}</h2>
+			) : null}
+
+			{/* display loader */}
 			{isLoading && isFetching ? (
 				<Loader2 className="w-8 h-8 text-rose-500 animate-spin mx-auto my-5" />
 			) : (
 				<ol className="flex flex-wrap gap-y-5 my-5 justify-between">
+					{/* display data */}
 					{data?.map((product) => (
 						<li key={product.id}>
 							<Card className="w-[250px]">
@@ -75,7 +74,7 @@ const ReactQueryFetchOnClickExample = () => {
 					))}
 				</ol>
 			)}
-		</div>
+		</>
 	);
 };
 

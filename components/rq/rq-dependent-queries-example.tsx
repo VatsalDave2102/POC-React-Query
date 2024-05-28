@@ -4,7 +4,6 @@ import axios from "axios";
 import { Loader2 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
-import { Album, User } from "@/types";
 import {
 	Card,
 	CardContent,
@@ -12,6 +11,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { Album, User } from "@/types";
 
 //  we have defined two fetching functions to shows dependant queries
 // first the user will be fetched and then album, this shows dependency of album on user
@@ -30,14 +30,14 @@ const fetchAlbumById = async (albumId: string): Promise<Album> => {
 };
 
 const ReactQueryDependentQueriesExample = () => {
-	// here we have user hard-coded userId, in real life scenario pass id through props or using searchParams
+	// here we have used hard-coded userId, in real life scenario pass id through props or using searchParams
 	const userId = "1";
 	const user = useQuery({
 		queryKey: ["user-dependent-query", userId],
 		queryFn: () => fetchUserById(userId),
 	});
 
-	// here we have user hard-coded albumId, in real life scenario pass id through props or using searchParams
+	// here we have used hard-coded albumId, in real life scenario pass id through props or using searchParams
 	const albumId = "1";
 	const album = useQuery({
 		queryKey: ["album-dependent-query", albumId],
@@ -64,16 +64,10 @@ const ReactQueryDependentQueriesExample = () => {
 		);
 	}
 	return (
-		<div className="container">
-			<h1 className="text-xl font-semibold text-center mt-5">
-				Dependant queries
-			</h1>
-			<p className="text-center">
-				The example shows how to fetch dependent data by first fetching the user
-				and then fetching album that depends upon whether user is found or not.
-			</p>
+		<>
 			{/* user card */}
-			<h2 className="text-xl font-semibold text-center mt-5">User</h2>
+			<h2 className="text-xl font-semibold mt-5">User</h2>
+
 			{user.isPending ? (
 				<div className="flex gap-x-2 items-center justify-center">
 					<p>Fetching user</p>
@@ -81,7 +75,7 @@ const ReactQueryDependentQueriesExample = () => {
 					<Loader2 className="w-8 h-8 text-rose-500 animate-spin my-5" />
 				</div>
 			) : (
-				<Card className="my-5">
+				<Card className="my-5 w-[300px]">
 					<CardHeader>
 						<CardTitle className="truncate">{user.data.name}</CardTitle>
 						<CardDescription className="h-[100px] text-wrap truncate">
@@ -95,8 +89,9 @@ const ReactQueryDependentQueriesExample = () => {
 					</CardContent>
 				</Card>
 			)}
+
 			{/* album card */}
-			<h2 className="text-xl font-semibold text-center mt-5">Album</h2>
+			<h2 className="text-xl font-semibold mt-5">Album</h2>
 
 			{album.isPending ? (
 				<div className="flex gap-x-2 items-center justify-center">
@@ -105,13 +100,13 @@ const ReactQueryDependentQueriesExample = () => {
 					<Loader2 className="w-8 h-8 text-rose-500 animate-spin my-5" />
 				</div>
 			) : (
-				<Card className="my-5">
+				<Card className="my-5 w-[300px]">
 					<CardHeader>
 						<CardTitle className="truncate">{album.data.title}</CardTitle>
 					</CardHeader>
 				</Card>
 			)}
-		</div>
+		</>
 	);
 };
 

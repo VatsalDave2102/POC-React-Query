@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { Loader2 } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 
 import {
 	Card,
@@ -11,7 +12,6 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Product, User } from "@/types";
-import { useQuery } from "@tanstack/react-query";
 
 // we have defined two fetching functions to show parallel queries
 // one for products and one for users
@@ -32,14 +32,17 @@ const ReactQueryParallelQueriesExample = () => {
 	// but when in suspense mode, this will not work as first query would throw
 	// a promise internally and would suspend the component
 	// to get around this, use useSuspenseQueries or useSuspenseQuery
+
+	// query to fetch products
 	const productsResult = useQuery({
 		queryKey: ["products"],
 		queryFn: fetchProducts,
 	});
 
+	// query to fetch users
 	const usersResult = useQuery({ queryKey: ["users"], queryFn: fetchUsers });
 
-	// destructuring loading state, data, error message recieved from useQuery
+	// destructuring loading state, data, error message recieved from results of products and users
 	const {
 		isPending: isProductsPending,
 		data: productsData,
@@ -53,36 +56,24 @@ const ReactQueryParallelQueriesExample = () => {
 		isError: isUsersError,
 		error: usersError,
 	} = usersResult;
-	// show error message if error occured during fetching,
-	// the error message gets delayed because react-query
-	// retries to fetch request
-	if (isProductsError) {
-		return (
-			<h2 className="text-2xl font-semibold text-center">
-				{productsError.message}
-			</h2>
-		);
-	}
 
-	if (isUsersError) {
-		return (
-			<h2 className="text-2xl font-semibold text-center">
-				{usersError.message}
-			</h2>
-		);
-	}
 	return (
-		<div className="container">
-			<h1 className="mt-5 font-semibold text-xl">
-				This is showcasing how to fetch data parallely using react query
-			</h1>
+		<>
 			<div className="flex mt-5 justify-evenly">
 				<div className="products">
 					<h2 className="text-xl font-semibold">Products list</h2>
+					{/* display products error */}
+					{isProductsError ? (
+						<h2 className="text-2xl font-semibold text-center">
+							{productsError.message}
+						</h2>
+					) : null}
+
+					{/* display loader */}
 					{isProductsPending ? (
 						<Loader2 className="w-8 h-8 text-rose-500 animate-spin mx-auto my-5" />
 					) : (
-						<ol className="flex flex-col gap-5 my-5 justify-between">
+						<ol className="flex flex-col gap-5 my-5">
 							{productsData?.map((product) => (
 								<li key={product.id}>
 									<Card className="w-[250px]">
@@ -108,10 +99,18 @@ const ReactQueryParallelQueriesExample = () => {
 				</div>
 				<div className="users">
 					<h2 className="text-xl font-semibold">Users list</h2>
+					{/* display user error */}
+					{isUsersError ? (
+						<h2 className="text-2xl font-semibold text-center">
+							{usersError.message}
+						</h2>
+					) : null}
+
+					{/* display loader */}
 					{isUsersPending ? (
 						<Loader2 className="w-8 h-8 text-rose-500 animate-spin mx-auto my-5" />
 					) : (
-						<ol className="flex flex-col gap-5 my-5 justify-between">
+						<ol className="flex flex-col gap-5 my-5">
 							{usersData?.map((user) => (
 								<li key={user.id}>
 									<Card className="w-[250px]">
@@ -133,7 +132,7 @@ const ReactQueryParallelQueriesExample = () => {
 					)}
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

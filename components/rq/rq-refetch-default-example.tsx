@@ -28,25 +28,24 @@ const ReactQueryRefetchDefaultExample = () => {
 		// there are other options as well
 	});
 
-	const { isPending, data, isError, error, isFetching, isRefetching } = results;
+	// extracting data, error and states
+	const { isPending, data, isError, error } = results;
 
-	// isPending to show when there is no cached data, and data is fetched
-	// isFetching is true on initial fetching and background fetching
-	// refetch boolean will be true when component mounts, or window is focused
-	console.log(isPending, isFetching, isRefetching);
-
-	if (isError) {
-		return (
-			<h2 className="text-2xl font-semibold text-center">{error.message}</h2>
-		);
-	}
 	return (
-		<div className="container">
-			<h2 className="text-2xl font-semibold text-center">Products list</h2>
+		<>
+			<h2 className="text-2xl font-semibold">Products list</h2>
+
+			{/* display error */}
+			{isError ? (
+				<h2 className="text-2xl font-semibold text-center">{error.message}</h2>
+			) : null}
+
+			{/* display loader */}
 			{isPending ? (
 				<Loader2 className="w-8 h-8 text-rose-500 animate-spin mx-auto my-5" />
 			) : (
 				<ol className="flex flex-wrap gap-y-5 my-5 justify-between">
+					{/* display data */}
 					{data?.map((product) => (
 						<li key={product.id}>
 							<Card className="w-[250px]">
@@ -67,7 +66,7 @@ const ReactQueryRefetchDefaultExample = () => {
 					))}
 				</ol>
 			)}
-		</div>
+		</>
 	);
 };
 

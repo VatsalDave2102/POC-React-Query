@@ -1,8 +1,9 @@
 import axios from "axios";
-import { Post } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 
-// define the fetcher function
+import { Post } from "@/types";
+
+// define the fetching function
 const fetchPosts = async (): Promise<Post[]> => {
 	const response = await axios.get(
 		"https://jsonplaceholder.typicode.com/posts"

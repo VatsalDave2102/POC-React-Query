@@ -1,11 +1,9 @@
-import { Product } from "@/types";
-import {
-	UseQueryResult,
-	useQuery,
-	useQueryClient,
-} from "@tanstack/react-query";
 import axios from "axios";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
+import { Product } from "@/types";
+
+// define the fetching function
 const fetchProduct = async ({
 	queryKey,
 }: {
