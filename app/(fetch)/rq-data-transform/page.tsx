@@ -9,7 +9,7 @@ export default function ReactQuerySuccessErrorPage() {
 				Data transformation example
 			</h1>
 			<p className="text-lg">
-				Demonstrate data transformation from the response using the select
+				Demonstrating data transformation from the response using the select
 				option in React Query. In this example, only titles of posts have been
 				extracted from response.
 			</p>

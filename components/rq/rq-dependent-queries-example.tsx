@@ -83,7 +83,7 @@ const ReactQueryDependentQueriesExample = () => {
 						</CardDescription>
 					</CardHeader>
 					<CardContent>
-						<div className="flex justify-between">
+						<div className="flex">
 							<p className="text-zinc-600">{user.data.role}</p>
 						</div>
 					</CardContent>

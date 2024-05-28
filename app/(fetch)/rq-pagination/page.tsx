@@ -8,8 +8,7 @@ export default function ReactQueryPaginationPage() {
 			<h1 className="text-2xl font-semibold mt-5">Pagination example</h1>
 			<p className="text-lg">
 				Implementing pagination using offset and limit, with keepPreviousData to
-				prevent showing a loader, and queryClient with useEffect to prefetch the
-				next page.
+				prevent showing a loader.
 			</p>
 			<ol className="list-disc list-inside text-lg my-1">
 				<li>

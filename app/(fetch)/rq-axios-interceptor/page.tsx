@@ -5,7 +5,9 @@ import ReactQueryAxiosInterceptorExample from "@/components/rq/rq-axios-intercep
 export default function ReactQueryAxiosInterceptorPage() {
 	return (
 		<div className="container text-zinc-700">
-			<h1 className="text-2xl font-semibold mt-5">Cache example</h1>
+			<h1 className="text-2xl font-semibold mt-5">
+				React Query with Axios Interceptor example
+			</h1>
 			<p className="text-lg">
 				Integrating Axios interceptors with React Query to handle errors, add an
 				HTTP authorization header. Create a user, log in the user to store a

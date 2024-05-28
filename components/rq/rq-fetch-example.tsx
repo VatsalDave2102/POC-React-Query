@@ -46,7 +46,7 @@ const ReactQueryFetchExample = () => {
 			{isPending ? (
 				<Loader2 className="w-8 h-8 text-rose-500 animate-spin mx-auto my-5" />
 			) : (
-				<ol className="flex flex-wrap gap-5 my-5 justify-between">
+				<ol className="flex flex-wrap gap-5 my-5">
 					{/* mapping over products */}
 					{data?.map((product) => (
 						<li key={product.id}>
