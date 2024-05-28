@@ -60,5 +60,14 @@ Check out the various examples provided in `/components/rq/`:
 
 ... and many more.
 
+### Running the project
+To run the project locally, clone it in your local machine and open that directory in the terminal, and use the following commands:
+```
+npm install
+npm run dev
+```
+
+### Live link
+Check out all the examples in action. [Click here](https://poc-react-query.vercel.app/)
 ### Conclusion
 This POC highlights the capabilities of React Query for managing server-state in React applications. By following the examples provided, you can efficiently implement data fetching, caching, data transformations, mutations, and pagination in your projects.
