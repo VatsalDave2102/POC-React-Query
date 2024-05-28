@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+ ## React Query Proof of Concept
 
-## Getting Started
+ ### Introduction
+[React Query](https://tanstack.com/query/latest) is a powerful library for managing server-state in React applications. It simplifies data fetching, caching, synchronization, and updating, allowing developers to focus on building feature-rich user interfaces.
 
-First, run the development server:
+This Proof of Concept (POC) demonstrates key use cases and best practices of React Query, including querying, mutations, pagination, and infinite scroll.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Integration Guide
+To start using React Query, install the required packages:
+```
+npm install react-query axios
+```
+Set up React Query Provider (for a Next.js app we need to create a wrapper component):
+
+`/components/provider/query-provider.tsx`
+```
+"use client";
+
+import { useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const QueryProvider = ({ children }: { children: React.ReactNode }) => {
+  const [queryClient] = useState(() => new QueryClient());
+  return (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  );
+};
+
+export default QueryProvider;
+```
+Now wrap it around the root layout of the app:
+```
+import QueryProvider from "@/components/provider/query-provider";
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body>
+        <QueryProvider>
+          {children}
+        </QueryProvider>
+      </body>
+    </html>
+  );
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Examples
+Check out the various examples provided in `/components/rq/`:
+- [Basic Fetch](https://github.com/VatsalDave2102/POC-React-Query/blob/main/components/rq/rq-fetch-example.tsx)
+- [Mutations](https://github.com/VatsalDave2102/POC-React-Query/blob/main/components/rq/rq-mutation-example.tsx)
+- [Pagination](https://github.com/VatsalDave2102/POC-React-Query/blob/main/components/rq/rq-pagination-example.tsx)
+- [Infinite Scroll](https://github.com/VatsalDave2102/POC-React-Query/blob/main/components/rq/rq-infinite-scroll-example.tsx)
+- [Data Transformation](https://github.com/VatsalDave2102/POC-React-Query/blob/main/components/rq/rq-data-transform-example.tsx)
+- [Polling](https://github.com/VatsalDave2102/POC-React-Query/blob/main/components/rq/rq-polling-example.tsx)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+... and many more.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Conclusion
+This POC highlights the capabilities of React Query for managing server-state in React applications. By following the examples provided, you can efficiently implement data fetching, caching, data transformations, mutations, and pagination in your projects.
