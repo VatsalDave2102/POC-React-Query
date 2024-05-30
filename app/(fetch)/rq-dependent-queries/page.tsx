@@ -53,7 +53,7 @@ export default function ReactQueryDependentQueriesPage() {
 					Click here
 				</Link>
 			</p>
-			<ReactQueryDependentQueriesExample />;
+			<ReactQueryDependentQueriesExample />
 		</div>
 	);
 }
