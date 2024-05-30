@@ -69,7 +69,7 @@ export default function ReactQueryAxiosInterceptorPage() {
 				<Link
 					className="text-blue-500 underline"
 					href={
-						"https://github.com/VatsalDave2102/POC-React-Query/blob/main/components/rq/rq-axios-interceptor.tsx"
+						"https://github.com/react-mern/POC-React-Query/blob/main/components/rq/rq-axios-interceptor.tsx"
 					}
 				>
 					Component code
@@ -78,7 +78,7 @@ export default function ReactQueryAxiosInterceptorPage() {
 				<Link
 					className="text-blue-500 underline"
 					href={
-						"https://github.com/VatsalDave2102/POC-React-Query/blob/main/utils/axios-utils.ts"
+						"https://github.com/react-mern/POC-React-Query/blob/main/utils/axios-utils.ts"
 					}
 				>
 					Axios Interceptor code

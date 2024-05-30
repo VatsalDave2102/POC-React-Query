@@ -47,7 +47,7 @@ export default function ReactQueryDependentQueriesPage() {
 				<Link
 					className="text-blue-500 underline"
 					href={
-						"https://github.com/VatsalDave2102/POC-React-Query/blob/main/components/rq/rq-dependent-queries-example.tsx"
+						"https://github.com/react-mern/POC-React-Query/blob/main/components/rq/rq-dependent-queries-example.tsx"
 					}
 				>
 					Click here

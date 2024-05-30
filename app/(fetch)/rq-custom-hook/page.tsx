@@ -51,7 +51,7 @@ export default function ReactQueryCustomHookPage() {
 				<Link
 					className="text-blue-500 underline"
 					href={
-						"https://github.com/VatsalDave2102/POC-React-Query/blob/main/components/rq/rq-custom-hook-example.tsx"
+						"https://github.com/react-mern/POC-React-Query/blob/main/components/rq/rq-custom-hook-example.tsx"
 					}
 				>
 					Component code
@@ -60,7 +60,7 @@ export default function ReactQueryCustomHookPage() {
 				<Link
 					className="text-blue-500 underline"
 					href={
-						"https://github.com/VatsalDave2102/POC-React-Query/blob/main/hooks/usePostsData.ts"
+						"https://github.com/react-mern/POC-React-Query/blob/main/hooks/usePostsData.ts"
 					}
 				>
 					Hook code

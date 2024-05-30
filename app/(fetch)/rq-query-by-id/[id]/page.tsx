@@ -58,7 +58,7 @@ export default function ReactQueryPostPage({
 				<Link
 					className="text-blue-500 underline"
 					href={
-						"https://github.com/VatsalDave2102/POC-React-Query/blob/main/components/rq/rq-query-by-id-example.tsx"
+						"https://github.com/react-mern/POC-React-Query/blob/main/components/rq/rq-query-by-id-example.tsx"
 					}
 				>
 					Products page
@@ -67,7 +67,7 @@ export default function ReactQueryPostPage({
 				<Link
 					className="text-blue-500 underline"
 					href={
-						"https://github.com/VatsalDave2102/POC-React-Query/blob/main/components/rq/rq-single-product.tsx"
+						"https://github.com/react-mern/POC-React-Query/blob/main/components/rq/rq-single-product.tsx"
 					}
 				>
 					Single product Page
@@ -76,7 +76,7 @@ export default function ReactQueryPostPage({
 				<Link
 					className="text-blue-500 underline"
 					href={
-						"https://github.com/VatsalDave2102/POC-React-Query/blob/main/hooks/useProductData.ts"
+						"https://github.com/react-mern/POC-React-Query/blob/main/hooks/useProductData.ts"
 					}
 				>
 					custom product fetching hook

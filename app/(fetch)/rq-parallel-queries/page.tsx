@@ -51,7 +51,7 @@ export default function ReactQueryParallelQueriesPage() {
 				<Link
 					className="text-blue-500 underline"
 					href={
-						"https://github.com/VatsalDave2102/POC-React-Query/blob/main/components/rq/rq-parallel-queries-example.tsx"
+						"https://github.com/react-mern/POC-React-Query/blob/main/components/rq/rq-parallel-queries-example.tsx"
 					}
 				>
 					Click here

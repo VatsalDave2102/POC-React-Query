@@ -12,13 +12,13 @@ const cardData = [
 	{
 		title: "Basic Fetch",
 		description: `Demonstrating simple data fetching with React Query's
-		useQuery hook.`,
+    useQuery hook.`,
 		link: "/rq-fetch",
 	},
 	{
 		title: "Mutations",
 		description: `Demonstrating a post request to add a user using useMutation,  and
-		updating the user list.`,
+    updating the user list.`,
 		link: "/rq-mutation",
 	},
 	{
@@ -29,19 +29,19 @@ const cardData = [
 	{
 		title: "Infinite Scroll",
 		description: `Implementing infinite scroll using useInfiniteQuery and React
-		Intersection Observer to fetch the next page automatically.`,
+    Intersection Observer to fetch the next page automatically.`,
 		link: "/rq-infinite-scroll",
 	},
 	{
 		title: "Data Transform",
 		description: `Demonstrating data transformation from the response using the select
-		option in React Query.`,
+    option in React Query.`,
 		link: "/rq-data-transform",
 	},
 	{
 		title: "Polling",
 		description: `Demonstrating data polling using refetchInterval and
-		refetchIntervalInBackground options in React Query.`,
+    refetchIntervalInBackground options in React Query.`,
 		link: "/rq-polling",
 	},
 ];

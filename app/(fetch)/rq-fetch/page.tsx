@@ -30,7 +30,7 @@ export default function ReactQueryFetchPage() {
 				<Link
 					className="text-blue-500 underline"
 					href={
-						"https://github.com/VatsalDave2102/POC-React-Query/blob/main/components/rq/rq-fetch-example.tsx"
+						"https://github.com/react-mern/POC-React-Query/blob/main/components/rq/rq-fetch-example.tsx"
 					}
 				>
 					Click here

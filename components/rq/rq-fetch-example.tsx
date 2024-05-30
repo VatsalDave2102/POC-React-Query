@@ -36,8 +36,8 @@ const ReactQueryFetchExample = () => {
 			<h2 className="text-2xl font-semibold">Products list</h2>
 
 			{/*  show error message if error occured during fetching,
-					the error message gets delayed because react-query
-	 				retries to fetch request */}
+          the error message gets delayed because react-query
+           retries to fetch request */}
 			{isError ? (
 				<h2 className="text-2xl font-semibold text-center">{error.message}</h2>
 			) : null}
